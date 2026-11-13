@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="pCloudy Flight Booking Suite" verbose="1">
+
+    <test name="Positive Tests">
+        <classes>
+            <class name="com.pcloudy.appium.tests.PositiveTests" />
+        </classes>
+    </test>
+
+    <test name="Negative Tests">
+        <classes>
+            <class name="com.pcloudy.appium.tests.NegativeTests" />
+        </classes>
+    </test>
+
+    <test name="CloudAngle Tests">
+        <classes>
+            <class name="com.pcloudy.appium.tests.CloudAngleTests" />
+        </classes>
+    </test>
+
+</suite>
