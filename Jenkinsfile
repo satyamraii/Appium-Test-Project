@@ -123,8 +123,11 @@ pipeline {
                     def mvnCmd = "mvn -B test ${opts.join(' ')} -Dtest='${env.TEST_SELECTION}'"
 
                     if (params.EXECUTION == 'pcloudy') {
-                        // The key comes from the Jenkins credential and reaches Config.java as env PCLOUDY_API_KEY.
-                        withCredentials([string(credentialsId: 'pcloudy-api-key', variable: 'PCLOUDY_API_KEY')]) {
+                        // Username and API key come from the Jenkins credential "pcloudy-prod-cred"
+                        // (Username with password) and reach Config.java as env PCLOUDY_USERNAME / PCLOUDY_API_KEY.
+                        withCredentials([usernamePassword(credentialsId: 'pcloudy-prod-cred',
+                                                          usernameVariable: 'PCLOUDY_USERNAME',
+                                                          passwordVariable: 'PCLOUDY_API_KEY')]) {
                             sh mvnCmd
                         }
                     } else {

@@ -146,7 +146,7 @@ The `Jenkinsfile` turns every test class and every test into a checkbox. In **Bu
 
 One-time setup:
 
-1. **Manage Jenkins → Credentials → System → Global → Add Credentials**: kind *Secret text*, ID `pcloudy-api-key`, secret = your pCloudy API key.
+1. **Manage Jenkins → Credentials**: a *Username with password* credential with ID `pcloudy-prod-cred` (username = pCloudy login, password = pCloudy API key). The pipeline passes them to the tests as `PCLOUDY_USERNAME` / `PCLOUDY_API_KEY`. They are never stored in this repo. For local runs, `export` those two variables.
 2. **New Item → Pipeline**, then under *Pipeline* choose *Pipeline script from SCM* → Git, enter this repo's URL, branch `*/main` and script path `Jenkinsfile`.
 3. Click **Build Now** once. That run only loads the checkboxes and stops with "Nothing ticked". After it, the button becomes **Build with Parameters**.
 
