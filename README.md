@@ -136,6 +136,22 @@ src/test/java/com/pcloudy/appium/
     └── CloudAngleTests.java     CA_01 – CA_19, NCA_11
 ```
 
+## Run from Jenkins
+
+The `Jenkinsfile` turns every test class and every test into a checkbox. In **Build with Parameters**, tick what you want and click **Build**.
+
+- `RUN_ALL_POSITIVE` / `RUN_ALL_NEGATIVE` / `RUN_ALL_CLOUDANGLE` run a whole class.
+- `TC_08_endToEndOneWayBooking`, `NTC_01_wrongPasswordIsRejected`, … run single tests. You can mix them with the class boxes.
+- `EXECUTION` picks `pcloudy` or `local`. The optional fields override the device for that run.
+
+One-time setup:
+
+1. **Manage Jenkins → Credentials → System → Global → Add Credentials**: kind *Secret text*, ID `pcloudy-api-key`, secret = your pCloudy API key.
+2. **New Item → Pipeline**, then under *Pipeline* choose *Pipeline script from SCM* → Git, enter this repo's URL, branch `*/main` and script path `Jenkinsfile`.
+3. Click **Build Now** once. That run only loads the checkboxes and stops with "Nothing ticked". After it, the button becomes **Build with Parameters**.
+
+Results appear under *Test Result* on each build, with screenshots and Surefire reports under *Build Artifacts*. Scheduling is off. To turn it on, uncomment the `pipelineTriggers` line in the `Jenkinsfile`.
+
 ## Reports
 
 - TestNG / Surefire reports: `target/surefire-reports/` (open `index.html`)
